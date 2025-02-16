@@ -1,3 +1,4 @@
+import Sidebar from '@/components/shared/sidebar'
 import { Button } from '@/components/ui/button'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 
@@ -24,8 +25,11 @@ function RootComponent() {
           <Button>Logout</Button>
         </nav>
       </header>
-      <section className='px-3'>
-        <Outlet />
+      <section className='px-3 flex  gap-3'>
+        <Sidebar />
+        <main className='flex-1'>
+          <Outlet />
+        </main>
       </section>
     </>
 
