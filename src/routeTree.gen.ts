@@ -14,6 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ServicesImport } from './routes/services'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as VendorsIndexImport } from './routes/vendors/index'
+import { Route as VendorsVendorIdImport } from './routes/vendors/$vendorId'
 
 // Create/Update Routes
 
@@ -32,6 +34,18 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const VendorsIndexRoute = VendorsIndexImport.update({
+  id: '/vendors/',
+  path: '/vendors/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const VendorsVendorIdRoute = VendorsVendorIdImport.update({
+  id: '/vendors/$vendorId',
+  path: '/vendors/$vendorId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +74,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesImport
       parentRoute: typeof rootRoute
     }
+    '/vendors/$vendorId': {
+      id: '/vendors/$vendorId'
+      path: '/vendors/$vendorId'
+      fullPath: '/vendors/$vendorId'
+      preLoaderRoute: typeof VendorsVendorIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/vendors/': {
+      id: '/vendors/'
+      path: '/vendors'
+      fullPath: '/vendors'
+      preLoaderRoute: typeof VendorsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +97,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/vendors': typeof VendorsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/vendors': typeof VendorsIndexRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +114,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
+  '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/vendors/': typeof VendorsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/services'
+  fullPaths: '/' | '/about' | '/services' | '/vendors/$vendorId' | '/vendors'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/services'
-  id: '__root__' | '/' | '/about' | '/services'
+  to: '/' | '/about' | '/services' | '/vendors/$vendorId' | '/vendors'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/services'
+    | '/vendors/$vendorId'
+    | '/vendors/'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +137,16 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ServicesRoute: typeof ServicesRoute
+  VendorsVendorIdRoute: typeof VendorsVendorIdRoute
+  VendorsIndexRoute: typeof VendorsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ServicesRoute: ServicesRoute,
+  VendorsVendorIdRoute: VendorsVendorIdRoute,
+  VendorsIndexRoute: VendorsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +161,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/services"
+        "/services",
+        "/vendors/$vendorId",
+        "/vendors/"
       ]
     },
     "/": {
@@ -128,6 +174,12 @@ export const routeTree = rootRoute
     },
     "/services": {
       "filePath": "services.tsx"
+    },
+    "/vendors/$vendorId": {
+      "filePath": "vendors/$vendorId.tsx"
+    },
+    "/vendors/": {
+      "filePath": "vendors/index.tsx"
     }
   }
 }
