@@ -1,6 +1,7 @@
 import Sidebar from '@/components/shared/sidebar'
 import { Button } from '@/components/ui/button'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { Toaster } from "@/components/ui/sonner"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -31,6 +32,7 @@ function RootComponent() {
           <Outlet />
         </main>
       </section>
+      <Toaster />
     </>
 
   )
