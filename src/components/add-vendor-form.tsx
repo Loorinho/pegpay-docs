@@ -1,7 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -50,6 +49,8 @@ export default function AddVendorForm() {
              * Save vendor details
              * 
              */
+
+            console.table(data)
 
             toast('You have successfully created the vendor!');
 

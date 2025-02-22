@@ -1,8 +1,6 @@
 import AddVendorForm from '@/components/add-vendor-form'
-import AddVendorFOrm from '@/components/add-vendor-form'
-import { Button } from '@/components/ui/button'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { createFileRoute } from '@tanstack/react-router'
+
 
 export const Route = createFileRoute('/vendors/')({
   component: VendorsPage,

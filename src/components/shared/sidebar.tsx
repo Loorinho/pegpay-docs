@@ -1,4 +1,4 @@
-import { Banknote, DollarSign, HandCoins, ReceiptText } from "lucide-react"
+import { DollarSign, ReceiptText } from "lucide-react"
 
 export default function Sidebar() {
     const products = [
