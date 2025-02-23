@@ -6,14 +6,14 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { useState } from "react"
-import { Button } from "./ui/button"
-import { Form } from "./ui/form"
+import { Button } from "../ui/button"
+import { Form } from "../ui/form"
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner"
@@ -52,12 +52,12 @@ export default function AddVendorForm() {
 
             console.table(data)
 
-            toast('You have successfully created the vendor!');
+            toast.success('You have successfully created the vendor!');
 
             setOpen(false);
             form.reset();
         } catch (error) {
-            toast('Sorry! Unable to create vendor at the moment!');
+            toast.error('Sorry! Unable to create vendor at the moment!');
 
         }
     }
