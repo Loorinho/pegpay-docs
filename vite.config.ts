@@ -19,5 +19,16 @@ export default defineConfig({
     },
   },
 
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://test.pegasus.co.ug:9108',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
+
 })
 

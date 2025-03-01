@@ -1,19 +1,28 @@
 import AddVendorForm from '@/components/vendor/add-vendor-form'
-import { columns, Payment } from '@/components/vendor/vendor-table-columns'
+import { columns, Vendor } from '@/components/vendor/vendor-table-columns'
 import { DataTable } from '@/components/vendor/vendors-table'
 import { createFileRoute, useLoaderData } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/vendors/')({
   component: VendorsPage,
-  loader: async (): Promise<Payment[]> => {
+  loader: async (): Promise<Vendor[]> => {
+    const url = "/api/pegasusaggregation/pegpayVendorOnboarding/";
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ requestType: "GetMomoVendors" })
+    });
 
-    return new Array(50).fill(null).map(() => ({
-      id: "728ed52f",
-      volume: Math.ceil(Math.random() * 1000),
-      status: "Active",
-      vendorCode: "Loorinho Bills",
-      email: "m@example.com",
-    }))
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data: Vendor[] = await response.json()
+    console.table(data)
+    // const data: Vendor[] = await response.json();
+    return data;
   }
 })
 

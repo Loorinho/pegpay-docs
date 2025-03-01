@@ -6,27 +6,32 @@ import { Button } from "../ui/button"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
-    id: string
-    volume: number
-    status: "Active" | "Inactive"
-    email: string
-    vendorCode: string
+export type Vendor = {
+    VendorCode: string
+    Active: string
+    ContactPerson: string
+    AccountType: string
+    VedorEmail: string
+    IsRequiredCert: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Vendor>[] = [
 
     {
-        accessorKey: "vendorCode",
+        accessorKey: "VendorCode",
         header: "Vendor Code",
     },
     {
-        accessorKey: "status",
-        header: "Status",
+        accessorKey: "Active",
+        header: "Active",
+    },
+    {
+        accessorKey: "AccountType",
+        header: "Account Type",
     },
     {
 
-        accessorKey: "email",
+        accessorKey: "VendorEmail",
         header: ({ column }) => {
             return (
                 <Button
@@ -40,7 +45,13 @@ export const columns: ColumnDef<Payment>[] = [
         },
     },
     {
-        accessorKey: "volume",
-        header: "Amount",
+        accessorKey: "IsRequiredCert",
+        header: "Certificate",
+
+    },
+
+    {
+        accessorKey: "ContactPerson",
+        header: "Contact Person",
     },
 ]
