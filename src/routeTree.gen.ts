@@ -15,6 +15,7 @@ import { Route as ServicesImport } from './routes/services'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as VendorsIndexImport } from './routes/vendors/index'
+import { Route as MomoIndexImport } from './routes/momo/index'
 import { Route as VendorsVendorIdImport } from './routes/vendors/$vendorId'
 
 // Create/Update Routes
@@ -40,6 +41,12 @@ const IndexRoute = IndexImport.update({
 const VendorsIndexRoute = VendorsIndexImport.update({
   id: '/vendors/',
   path: '/vendors/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MomoIndexRoute = MomoIndexImport.update({
+  id: '/momo/',
+  path: '/momo/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorsVendorIdImport
       parentRoute: typeof rootRoute
     }
+    '/momo/': {
+      id: '/momo/'
+      path: '/momo'
+      fullPath: '/momo'
+      preLoaderRoute: typeof MomoIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/vendors/': {
       id: '/vendors/'
       path: '/vendors'
@@ -98,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/momo': typeof MomoIndexRoute
   '/vendors': typeof VendorsIndexRoute
 }
 
@@ -106,6 +121,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/momo': typeof MomoIndexRoute
   '/vendors': typeof VendorsIndexRoute
 }
 
@@ -115,20 +131,28 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/services': typeof ServicesRoute
   '/vendors/$vendorId': typeof VendorsVendorIdRoute
+  '/momo/': typeof MomoIndexRoute
   '/vendors/': typeof VendorsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/services' | '/vendors/$vendorId' | '/vendors'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/services'
+    | '/vendors/$vendorId'
+    | '/momo'
+    | '/vendors'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/services' | '/vendors/$vendorId' | '/vendors'
+  to: '/' | '/about' | '/services' | '/vendors/$vendorId' | '/momo' | '/vendors'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/services'
     | '/vendors/$vendorId'
+    | '/momo/'
     | '/vendors/'
   fileRoutesById: FileRoutesById
 }
@@ -138,6 +162,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ServicesRoute: typeof ServicesRoute
   VendorsVendorIdRoute: typeof VendorsVendorIdRoute
+  MomoIndexRoute: typeof MomoIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
 }
 
@@ -146,6 +171,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ServicesRoute: ServicesRoute,
   VendorsVendorIdRoute: VendorsVendorIdRoute,
+  MomoIndexRoute: MomoIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
 }
 
@@ -163,6 +189,7 @@ export const routeTree = rootRoute
         "/about",
         "/services",
         "/vendors/$vendorId",
+        "/momo/",
         "/vendors/"
       ]
     },
@@ -177,6 +204,9 @@ export const routeTree = rootRoute
     },
     "/vendors/$vendorId": {
       "filePath": "vendors/$vendorId.tsx"
+    },
+    "/momo/": {
+      "filePath": "momo/index.tsx"
     },
     "/vendors/": {
       "filePath": "vendors/index.tsx"

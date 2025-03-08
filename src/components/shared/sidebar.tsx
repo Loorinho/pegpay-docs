@@ -1,9 +1,11 @@
+import { Link } from "@tanstack/react-router"
 import { DollarSign, ReceiptText } from "lucide-react"
 
 export default function Sidebar() {
     const products = [
         {
             name: "Mobile Money",
+            link: "/momo/",
             icon: <DollarSign />,
             methods: [
                 {
@@ -26,6 +28,7 @@ export default function Sidebar() {
 
         {
             name: "Bill Payments",
+            link: "/momo/",
             icon: <ReceiptText />,
             methods: [
                 {
@@ -58,9 +61,11 @@ export default function Sidebar() {
                     {
                         products.map((item) => {
                             return (
-                                <div className="flex items-end gap-1">
-                                    {item.icon}
-                                    <p>{item.name}</p>
+                                <div className="flex items-end gap-1" key={item.name}>
+                                    {/* {item.icon} */}
+                                    <Link to={item.link} className="flex items-center gap-1">
+                                        <p>{item.name}</p>
+                                    </Link>
                                 </div>
                             )
                         })
