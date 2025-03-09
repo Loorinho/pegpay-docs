@@ -15,7 +15,7 @@ export type Transaction = {
     TelecomId: string
     Status: string
     RecordDate: string
-    // TransCategory: string
+    TransCategory: string
     // Phone: string
     // TranAmount: string
     // CustomerName: string
@@ -50,6 +50,11 @@ export const TransactionColumns: ColumnDef<Transaction>[] = [
         accessorKey: "ToAccount",
         header: "To Account",
     },
+    {
+        accessorKey: "TransCategory",
+        header: "Trans Category",
+    },
+
     {
         accessorKey: "TelecomId",
         header: "TelecomID",

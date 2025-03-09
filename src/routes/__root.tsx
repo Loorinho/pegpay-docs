@@ -20,6 +20,9 @@ function RootComponent() {
           <Link to="/about" className="[&.active]:font-bold">
             About
           </Link>
+          <Link to="/docs/momo" className="[&.active]:font-bold">
+            Momo Docs
+          </Link>
           <Link to="/vendors" className="[&.active]:font-bold">
             Vendors
           </Link>
